@@ -48,6 +48,8 @@ from time import mktime
 import json
 from EP_parsing.parser_1 import parse as parser1
 from EP_parsing.parser_2 import parse as parser2
+from EP_parsing.parser_3 import parse as parser3
+from EP_parsing.parser_4 import parse as parser4
 
 
 RSS_URL = 'https://www.pravda.com.ua/rss/view_news/'
@@ -69,10 +71,12 @@ for item in feed.entries:
         data.update(parser1(data['url']))
     elif data['url'].split('/')[2][4:] == 'epravda.com.ua':
         data.update(parser2(data['url']))
-
+    elif data['url'].split('/')[2][0:] == 'life.pravda.com.ua':
+        data.update(parser3(data['url']))
+    elif data['url'].split('/')[2][0:] == 'eurointegration.com.ua':
+        data.update(parser4(data['url']))
     news.append(data)
 
-pprint(news)
 with open('news.json', 'w') as file:
     json.dump(news, file, indent=4)
     file.close()
