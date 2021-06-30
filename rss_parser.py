@@ -40,7 +40,6 @@
 # with open('news.json', 'w') as file:
 #     json.dump(news, file, indent=4)
 #     file.close()
-from os import link
 from feedparser import *
 from pprint import pprint
 from datetime import datetime
@@ -77,6 +76,6 @@ for item in feed.entries:
         data.update(parser4(data['url']))
     news.append(data)
 
-with open('news.json', 'w') as file:
-    json.dump(news, file, indent=4)
+with open('news.json', 'w', encoding='utf8') as file:
+    json.dump(news, file, indent=4, ensure_ascii=False)
     file.close()
